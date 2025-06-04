@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pet-Friendly City Campaign 🐾 - CSS Carousel with Dots</title>
+<style>
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0b2d3a 0%, #1f3a48 100%);
+    color: #c3dfe6;
+    scroll-behavior: smooth;
+  }
+  a {
+    color: #7be8fd;
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    color: #a9f0ff;
+    outline: none;
+  }
+  /* Header and Navigation */
+  header {
+    background-color: #143640cc;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    backdrop-filter: saturate(180%) blur(10px);
+  }
+  nav ul {
+    margin: 0;
+    padding: 0.9rem 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2.8rem;
+  }
+  nav ul li a {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #a5d0e8;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    display: inline-block;
+  }
+  nav ul li a:hover,
+  nav ul li a:focus {
+    background-color: #0c95c5;
+    color: #e0f7ff;
+    transform: scale(1.12);
+    outline: none;
+    box-shadow: 0 0 12px #0c95c5;
+  }
+
+  /* Hero Section */
+  .hero {
+    background:
+      linear-gradient(rgba(10,40,50,0.88), rgba(15,55,70,0.88)),
+      url('https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #bef1ff;
+    text-align: center;
+    padding: 0 1.8rem;
+    text-shadow:
+      0 4px 10px rgba(0,0,0,0.75),
+      0 1px 1px rgba(0,0,0,0.5);
+  }
+  .hero h1 {
+    font-size: 3.9rem;
+    font-weight: 900;
+    letter-spacing: 3.7px;
+    margin-bottom: 1.3rem;
+    line-height: 1.1;
+    animation: fadeInDown 1.4s ease forwards;
+  }
+  .hero .cta-buttons {
+    margin-top: 2.6rem;
+    display: flex;
+    gap: 1.7rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero .btn {
+    background-color: #0ca4dd;
+    padding: 1.2rem 3rem;
+    color: #e1f7ff;
+    font-size: 1.4rem;
+    border: none;
+    border-radius: 52px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow:
+      0 6px 15px rgb(12 164 221 / 0.75);
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      color 0.3s ease;
+    user-select: none;
+    text-shadow: 0 1.5px 2.2px rgba(0,0,0,0.4);
+    border: 2px solid transparent;
+  }
+  .hero .btn:hover,
+  .hero .btn:focus {
+    background-color: #06557E;
+    box-shadow:
+      0 9px 30px rgb(6 85 126 / 0.9);
+    transform: translateY(-4px);
+    color: #b6e4ff;
+    outline: none;
+    border-color: #7be8fd;
+  }
+
+  /* Sections */
+  section {
+    max-width: 1100px;
+    margin: 5rem auto 7rem;
+    padding: 0 1.8rem;
+  }
+  h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    color: #5ebbbd;
+    letter-spacing: 1.3px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  p {
+    font-weight: 500;
+    line-height: 1.7;
+    max-width: 720px;
+    margin: 0 auto;
+    color: #acd9e4;
+    text-align: center;
+    text-shadow: 0 1.2px 2.2px rgba(0,0,0,0.2);
+  }
+
+  /* Volunteer Form */
+  form {
+    background-color: #1f3a48dd;
+    border-radius: 18px;
+    max-width: 460px;
+    margin: auto;
+    padding: 3rem 3.4rem;
+    box-shadow: 0 9px 22px rgb(0 0 0 / 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    color: #b0d6e8;
+  }
+  label {
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: #77b6c8;
+  }
+  input, select {
+    font-size: 1.15rem;
+    padding: 0.75rem 1.1rem;
+    border: 2px solid #5da5bc;
+    border-radius: 12px;
+    background: #12323dcc;
+    color: #c9e9ff;
+    transition: border-color 0.4s ease, background-color 0.4s ease;
+  }
+  input::placeholder, select option {
+    color: #8caebd;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: #0ca4dd;
+    background-color: #164b5a;
+    color: #e0f7ff;
+  }
+  button[type="submit"] {
+    margin-top: 1.7rem;
+    background-color: #0ca4dd;
+    border: none;
+    color: white;
+    font-size: 1.33rem;
+    font-weight: 800;
+    padding: 1.1rem 0;
+    border-radius: 52px;
+    cursor: pointer;
+    box-shadow: 0 9px 23px rgb(12 164 221 / 0.7);
+    transition: background-color 0.35s ease, transform 0.35s ease;
+  }
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background-color: #064d70;
+    box-shadow: 0 14px 40px rgb(6 77 112 / 0.85);
+    transform: translateY(-4px);
+    outline: none;
+  }
+
+  /* Hidden radio inputs for pets carousel */
+  input[type="radio"] {
+    display: none;
+  }
+
+  /* Pet and Impact Stories shared carousel container */
+  .carousel-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #164851;
+    box-shadow: 0 20px 44px rgb(0 0 0 / 0.65);
+    user-select: none;
+  }
+
+  /* Carousel slides - only one visible at a time */
+  .carousel-slides {
+    position: relative;
+    height: 330px;
+  }
+  .carousel-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.75);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.85);
+    overflow: hidden;
+  }
+  .carousel-slide .carousel-overlay {
+    background: rgba(0,0,0,0.55);
+    width: 100%;
+    padding: 2.5rem 2.4rem;
+    box-sizing: border-box;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: pre-line;
+  }
+  .carousel-slide:focus {
+    outline: 3px solid #0ca4dd;
+  }
+
+  /* Show slide when corresponding radio is checked */
+  input#pets-slide1:checked ~ .carousel-container.pets .carousel-slides #pet-slide1,
+  input#pets-slide2:checked ~ .carousel-container.pets .carousel-slides #pet-slide2,
+  input#pets-slide3:checked ~ .carousel-container.pets .carousel-slides #pet-slide3,
+  input#pets-slide4:checked ~ .carousel-container.pets .carousel-slides #pet-slide4,
+  input#pets-slide5:checked ~ .carousel-container.pets .carousel-slides #pet-slide5,
+  input#pets-slide6:checked ~ .carousel-container.pets .carousel-slides #pet-slide6 {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+  }
+  input#impact-slide1:checked ~ .carousel-container.impact .carousel-slides #impact-slide1,
+  input#impact-slide2:checked ~ .carousel-container.impact .carousel-slides #impact-slide2,
+  input#impact-slide3:checked ~ .carousel-container.impact .carousel-slides #impact-slide3,
+  input#impact-slide4:checked ~ .carousel-container.impact .carousel-slides #impact-slide4,
+  input#impact-slide5:checked ~ .carousel-container.impact .carousel-slides #impact-slide5 {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+  }
+
+  /* Navigation dots container */
+  .dots-nav {
+    text-align: center;
+    margin-top: 12px;
+    user-select: none;
+  }
+  .dots-nav label {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: #0ca4ddaa;
+    border-radius: 50%;
+    margin: 0 8px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(12, 164, 221, 0.85);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .dots-nav label:hover,
+  .dots-nav label:focus {
+    background: #0ca4dd;
+    outline: none;
+    transform: scale(1.5);
+  }
+  /* Active dot styling with :checked + label */
+  /* Pets */
+  #pets-slide1:checked ~ .dots-nav.pets label[for="pets-slide1"],
+  #pets-slide2:checked ~ .dots-nav.pets label[for="pets-slide2"],
+  #pets-slide3:checked ~ .dots-nav.pets label[for="pets-slide3"],
+  #pets-slide4:checked ~ .dots-nav.pets label[for="pets-slide4"],
+  #pets-slide5:checked ~ .dots-nav.pets label[for="pets-slide5"],
+  #pets-slide6:checked ~ .dots-nav.pets label[for="pets-slide6"] {
+    background: #0a7cb4;
+    transform: scale(1.8);
+    box-shadow: 0 4px 14px rgba(10,124,180,0.95);
+  }
+  /* Impact */
+  #impact-slide1:checked ~ .dots-nav.impact label[for="impact-slide1"],
+  #impact-slide2:checked ~ .dots-nav.impact label[for="impact-slide2"],
+  #impact-slide3:checked ~ .dots-nav.impact label[for="impact-slide3"],
+  #impact-slide4:checked ~ .dots-nav.impact label[for="impact-slide4"],
+  #impact-slide5:checked ~ .dots-nav.impact label[for="impact-slide5"] {
+    background: #0a7cb4;
+    transform: scale(1.8);
+    box-shadow: 0 4px 14px rgba(10,124,180,0.95);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    background-color: #143640cc;
+    color: #9ee7ff;
+    padding: 2.3rem 1rem;
+    font-weight: 600;
+    box-shadow: 0 -5px 14px rgba(0,0,0,0.6);
+    user-select: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero h1 {
+      font-size: 2.8rem;
+    }
+    section {
+      margin: 3rem 1rem 5rem;
+    }
+    .carousel-slide {
+      font-size: 1.15rem;
+      padding: 2rem 2rem 2.2rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 2.2rem;
+    }
+    nav ul {
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="#home" aria-label="Home">Home</a></li>
+      <li><a href="#about" aria-label="About">About</a></li>
+      <li><a href="#volunteer" aria-label="Volunteer">Volunteer</a></li>
+      <li><a href="#impact" aria-label="Impact Stories">Impact Stories</a></li>
+      <li><a href="#contact" aria-label="Contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="hero" role="banner" aria-label="Hero Section">
+    <h1>Making Cities Paw-some! 🐾✨</h1>
+    <div class="cta-buttons">
+      <a href="#volunteer" role="button" class="btn">Join the Movement</a>
+      <a href="#volunteer" role="button" class="btn">Volunteer Now</a>
+      <a href="#about" role="button" class="btn">Learn More</a>
+    </div>
+  </section>
+
+  <section id="about" aria-label="About the Campaign">
+    <h2>🐶 About the Campaign</h2>
+    <p>
+      We’re on a mission to transform cities into safe, welcoming spaces for our furry friends 🐕🐈. Join us in making urban life better for street dogs and all pets by volunteering and spreading awareness!
+    </p>
+  </section>
+
+  <section id="volunteer" aria-label="Volunteer Sign Up">
+    <h2>📋 Volunteer Sign Up</h2>
+    <form>
+      <label for="name">Name <span aria-hidden="true">🐾</span>:</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+      <label for="city">City <span aria-hidden="true">🏙️</span>:</label>
+      <input type="text" id="city" name="city" placeholder="Where you are from" required />
+
+      <label for="role">Role Preference <span aria-hidden="true">🤝</span>:</label>
+      <select id="role" name="role" required>
+        <option value="" disabled selected>Choose your preferred role</option>
+        <option value="rescuer">Rescuer</option>
+        <option value="fundraiser">Fundraiser</option>
+        <option value="event-organizer">Event Organizer</option>
+        <option value="social-media">Social Media Ambassador</option>
+        <option value="foster-carer">Foster Carer</option>
+      </select>
+
+      <button type="submit" aria-label="Submit Volunteer Form">Sign Up</button>
+    </form>
+  </section>
+
+  <!-- Adoptable Pets carousel -->
+  <section id="pets" aria-label="Adoptable Pets">
+    <h2>🐾 Adoptable Pets: Find Your New Friend</h2>
+
+    <!-- Hidden radio inputs -->
+    <input type="radio" name="pets" id="pets-slide1" checked>
+    <input type="radio" name="pets" id="pets-slide2">
+    <input type="radio" name="pets" id="pets-slide3">
+    <input type="radio" name="pets" id="pets-slide4">
+    <input type="radio" name="pets" id="pets-slide5">
+    <input type="radio" name="pets" id="pets-slide6">
+
+    <div class="carousel-container pets" aria-live="polite" aria-atomic="true">
+      <div class="carousel-slides">
+        <article id="pet-slide1" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Buddy, happy dog, 2 years old, Friendly & Playful">
+          <div class="carousel-overlay">Buddy 🐕<br>2 years old | Friendly &amp; Playful</div>
+        </article>
+        <article id="pet-slide2" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Misty, gentle cat, 3 years old, Calm & Loving">
+          <div class="carousel-overlay">Misty 🐈<br>3 years old | Calm &amp; Loving</div>
+        </article>
+        <article id="pet-slide3" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Charlie, small dog with big eyes, 1 year old, Energetic & Curious">
+          <div class="carousel-overlay">Charlie 🐶<br>1 year old | Energetic &amp; Curious</div>
+        </article>
+        <article id="pet-slide4" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Luna, playful kitten, 6 months old, Playful & Sweet">
+          <div class="carousel-overlay">Luna 🐱<br>6 months old | Playful &amp; Sweet</div>
+        </article>
+        <article id="pet-slide5" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Max, energetic dog, 4 years old, Loyal & Brave">
+          <div class="carousel-overlay">Max 🐕<br>4 years old | Loyal &amp; Brave</div>
+        </article>
+        <article id="pet-slide6" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1444212477498-8aa4e2557c5d?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Bella, sweet cat, 5 years old, Curious & Affectionate">
+          <div class="carousel-overlay">Bella 🐈<br>5 years old | Curious &amp; Affectionate</div>
+        </article>
+      </div>
+    </div>
+
+    <nav class="dots-nav pets" role="tablist" aria-label="Adoptable Pets navigation dots">
+      <label for="pets-slide1" role="tab" tabindex="0" aria-selected="true" aria-controls="pet-slide1" title="Buddy"></label>
+      <label for="pets-slide2" role="tab" tabindex="0" aria-selected="false" aria-controls="pet-slide2" title="Misty"></label>
+      <label for="pets-slide3" role="tab" tabindex="0" aria-selected="false" aria-controls="pet-slide3" title="Charlie"></label>
+      <label for="pets-slide4" role="tab" tabindex="0" aria-selected="false" aria-controls="pet-slide4" title="Luna"></label>
+      <label for="pets-slide5" role="tab" tabindex="0" aria-selected="false" aria-controls="pet-slide5" title="Max"></label>
+      <label for="pets-slide6" role="tab" tabindex="0" aria-selected="false" aria-controls="pet-slide6" title="Bella"></label>
+    </nav>
+  </section>
+
+  <!-- Impact Stories carousel -->
+  <section id="impact" aria-label="Impact Stories">
+    <h2>🌟 Impact Stories</h2>
+
+    <!-- Hidden radio inputs -->
+    <input type="radio" name="impact" id="impact-slide1" checked>
+    <input type="radio" name="impact" id="impact-slide2">
+    <input type="radio" name="impact" id="impact-slide3">
+    <input type="radio" name="impact" id="impact-slide4">
+    <input type="radio" name="impact" id="impact-slide5">
+
+    <div class="carousel-container impact" aria-live="polite" aria-atomic="true">
+      <div class="carousel-slides">
+        <article id="impact-slide1" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Max rescued from streets and now with a loving family">
+          <div class="carousel-overlay">Max was rescued from the streets and now happily living with a loving family. 🏡🐕</div>
+        </article>
+        <article id="impact-slide2" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Community volunteers saved over 50 stray pets">
+          <div class="carousel-overlay">Community volunteers saved over 50 stray pets last year! Teamwork makes the dream work! 🤝🐾</div>
+        </article>
+        <article id="impact-slide3" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Awareness campaigns improved pet-friendly policies">
+          <div class="carousel-overlay">Our awareness campaigns helped improve pet-friendly policies in 3 cities. 📢🌆</div>
+        </article>
+        <article id="impact-slide4" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1537151678618-02934ddb0cb2?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Foster homes saved over 20 dogs this year">
+          <div class="carousel-overlay">Foster homes saved over 20 dogs this year, giving them a second chance. 🏠🐾</div>
+        </article>
+        <article id="impact-slide5" class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80');" tabindex="0" aria-label="Annual fundraiser raised over $100k for pet shelters">
+          <div class="carousel-overlay">Annual fundraiser raised over $100k for pet shelters. 🎉💖</div>
+        </article>
+      </div>
+    </div>
+
+    <nav class="dots-nav impact" role="tablist" aria-label="Impact Stories navigation dots">
+      <label for="impact-slide1" role="tab" tabindex="0" aria-selected="true" aria-controls="impact-slide1" title="Story 1"></label>
+      <label for="impact-slide2" role="tab" tabindex="0" aria-selected="false" aria-controls="impact-slide2" title="Story 2"></label>
+      <label for="impact-slide3" role="tab" tabindex="0" aria-selected="false" aria-controls="impact-slide3" title="Story 3"></label>
+      <label for="impact-slide4" role="tab" tabindex="0" aria-selected="false" aria-controls="impact-slide4" title="Story 4"></label>
+      <label for="impact-slide5" role="tab" tabindex="0" aria-selected="false" aria-controls="impact-slide5" title="Story 5"></label>
+    </nav>
+  </section>
+
+  <section id="contact" aria-label="Contact Information">
+    <h2>📞 Contact Us</h2>
+    <p>
+      Have questions or want to get involved? Reach out via email at <a href="mailto:contact@petfriendlycity.org">contact@petfriendlycity.org</a> or call us at <a href="tel:+1234567890">+1 234 567 890</a>.
+    </p>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <p>© 2023 Pet-Friendly City Campaign. Made with ❤️ by Volunteers.</p>
+</footer>
+
+</body>
+</html>
+
